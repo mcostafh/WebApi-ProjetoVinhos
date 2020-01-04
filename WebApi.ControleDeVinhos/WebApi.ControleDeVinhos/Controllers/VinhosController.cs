@@ -26,9 +26,9 @@ namespace WebApi.ControleDeVinhos.Controllers
             this.repository = repository;
         }
 
-        public IEnumerable<Vinhos> GetVinhos()
+        public async Task<IEnumerable<Vinhos>> GetVinhosAsync()
         {
-            return this.repository.GetVinhos();
+            return repository.GetVinhos();
         }
 
 
@@ -36,7 +36,8 @@ namespace WebApi.ControleDeVinhos.Controllers
         [ResponseType(typeof(Vinhos))]
         public async Task<IHttpActionResult> GetVinhos(int id)
         {
-            Vinhos vinho = this.repository.GetVinhosById(id);
+            Vinhos vinho = repository.GetVinhosById(id);
+
             if (vinho == null)
             {
                 return NotFound();
@@ -62,7 +63,7 @@ namespace WebApi.ControleDeVinhos.Controllers
 
             try
             {
-                this.repository.UpdateVinho(vinho);
+                repository.UpdateVinho(vinho);
             }
             catch
             {
@@ -82,7 +83,7 @@ namespace WebApi.ControleDeVinhos.Controllers
 
             try
             {
-                this.repository.InsertVinho(vinho);
+                repository.InsertVinho(vinho);
             }
             catch
             {
